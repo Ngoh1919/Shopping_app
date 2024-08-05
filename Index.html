@@ -13,27 +13,32 @@
                 <div class="Create_Shoping_list">
                     <legend class="CSL">Create Shopping List</legend>
                 </div>
-            <div>
-                <label>Budget:</label>
-                <input type="number" min="0"/>
+            <div class="budget">
+                <label class="budget_label">Budget:</label>
+                <input type="number" min="0" class="budget_input" />
             </div>
             <div class="list">
-                <span>List</span>
+                <span class="list_text">List</span>
             </div>
             <div class="list_body">
-                <div>
-                    <span>Items</span>
-                    <span>Price</span>
+                <div class="titles">
+                    <div class="item_text"><span >Items</span></div>
+                    <div class="price_text"><span >Price</span></div>
                 </div>
-                <div>
-                    <input type="text" id="item"/>
-                    <input type="text" id="price"/>
+                <div class="price-text-in" >
+                    <span class="item-num" id="item_number">1</span>
+                    <input type="text" id="item" class="item_class"/>
+                    <input type="number" min="0" id="price" class="price_class"/>
                 </div>
-                <button id="add">
-                    +
-                </button>        
+                <div class="plus">                
+                    <button id="add" class="add_button">
+                        +
+                    </button>
+                </div>
+        
             </div>
-            <button id="generate" class="generate_but">Generate List</button>
+            <div class="list-gen"><button id="generate" class="generate_but">Generate List</button></div>
+            
             
         </div>
    </div>

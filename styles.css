@@ -3,13 +3,15 @@
     display: flex;
     height: 580px;
     width: 100%; 
+    color: white;
    
 }
 .main_body{
     background-color: #304145;
     display:flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    column-gap: normal;
     align-items: center;
     padding:10px; 
     height:400px;
@@ -46,13 +48,6 @@
     display: flex;
     float: left;
 }
-.CSL{
-    z-index: 1;
-    color: white;
-
-
-   
-}
 .end{
     width: 20px;
     height: 20px;
@@ -63,4 +58,107 @@
     border-radius: 5px;
     border:none;
     color: white;
+}
+.budget{
+    color: white;
+    display: flex;
+    justify-content: right;
+    align-content: center;
+    width: 250px;
+    
+}
+.budget_input{
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    border: none;    
+}
+.list{
+    background-image: linear-gradient(
+        to bottom,
+        #304145 0%,
+        #304145 50%,
+        #BD3147 50%,
+        #BD3147 100%
+       ); 
+    border-radius: 5px;
+    aspect-ratio: 2/1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.titles{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+}
+.list_body{
+    width: 250px;
+    padding: 3px;
+
+}
+.item_text{
+   
+    background-image: linear-gradient(
+        to bottom,
+        #BAC7CE 0%,
+        #BAC7CE 50%,
+        #BD3147 50%,
+        #BD3147 100%
+       );
+    border: none;  
+    border-radius: 5px; 
+    color: black;
+    
+
+}
+.price_text{
+    background-image: linear-gradient(
+        to bottom,
+        #BAC7CE 0%,
+        #BAC7CE 50%,
+        #BD3147 50%,
+        #BD3147 100%
+       );
+    border: none;  
+    border-radius: 5px;
+    color: black;
+    margin-right: 50px;
+    
+}
+.item_class{
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+}
+.price_class{
+    width:70px;
+    border: none;
+    border-radius: 5px;
+}
+.price-text-in{
+    padding: 3px;
+}
+.add_button{
+    color: white;
+    background-color: #BD3147;
+    border: none;
+    border-radius: 5px;
+    width: 20px;
+    aspect-ratio: 1/1;
+    margin-right: 15px;
+}
+.plus{
+    display: flex;
+    justify-content: flex-end;
+
+}
+.list-gen{
+    padding: 3px;
+    margin-top: auto;   
+   
+}
+
+.item-num{
+    color: black;
 }
