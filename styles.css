@@ -1,3 +1,8 @@
+*{
+    margin:0;
+    padding:0;
+    outline:0;
+}
 .parent_body{
     background-color:#BAC7CE ;
     display: flex;
@@ -95,7 +100,16 @@
 .list_body{
     width: 250px;
     padding: 3px;
+    overflow-y: scroll;
 
+}
+.list_body::-webkit-scrollbar{
+    width: 5px;
+    
+}
+.list_body::-webkit-scrollbar-thumb{
+    background-color: #b8362a;
+    border-radius: 5px;
 }
 .item_text{
    
@@ -109,6 +123,7 @@
     border: none;  
     border-radius: 5px; 
     color: black;
+    margin-left: 15px;
     
 
 }
@@ -123,11 +138,11 @@
     border: none;  
     border-radius: 5px;
     color: black;
-    margin-right: 50px;
+    margin-right: 40px;
     
 }
 .item_class{
-    width: 150px;
+    width: 135px;
     border: none;
     border-radius: 5px;
 }
@@ -145,12 +160,27 @@
     border: none;
     border-radius: 5px;
     width: 20px;
-    aspect-ratio: 1/1;
+    height:20px;
+    
     margin-right: 15px;
+    margin-top: 5px;
 }
-.plus{
+.sub_button{
+    color: white;
+    background-color: #BD3147;
+    border: none;
+    border-radius: 5px;
+    width: 20px;
+    height:20px;
+    
+    margin-left: 15px;
+    margin-top: 5px;
+  
+}
+.plusSub{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+   
 
 }
 .list-gen{
@@ -161,4 +191,18 @@
 
 .item-num{
     color: black;
+}
+.total_cost{
+  margin-top: 10px;
+  color: white;
+    
+}
+.total_cost span{
+    color: #304145;
+}
+ .Alert{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    color: #304145;
 }

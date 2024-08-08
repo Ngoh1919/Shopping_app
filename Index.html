@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="styles.css">    
 </head>
 <body>
     <div class="parent_body">
@@ -15,34 +14,118 @@
                 </div>
             <div class="budget">
                 <label class="budget_label">Budget:</label>
-                <input type="number" min="0" class="budget_input" />
+                <input type="number" min="0" class="budget_input" id="budget_value" />
             </div>
             <div class="list">
                 <span class="list_text">List</span>
             </div>
-            <div class="list_body">
+            <div class="list_body" id="list_container" >
                 <div class="titles">
                     <div class="item_text"><span >Items</span></div>
                     <div class="price_text"><span >Price</span></div>
                 </div>
-                <div class="price-text-in" >
-                    <span class="item-num" id="item_number">1</span>
-                    <input type="text" id="item" class="item_class"/>
-                    <input type="number" min="0" id="price" class="price_class"/>
+                <div id="PTI">
+                    <div class="price-text-in" id="textPrice_1" >
+                        <span class="item-num" id="item_number">1</span>
+                        <input type="text" id="item" class="item_class"/>
+                        <input type="number" min="0" id="price_1" class="price_class" oninput="calculate()"/>
+                   </div>
                 </div>
-                <div class="plus">                
-                    <button id="add" class="add_button">
+                
+                <div class="plusSub" >                
+                    <button id="add" class="sub_button" onclick="delButton()">
+                        -
+                    </button>
+                    <div >
+                        <h4 class="total_cost">Total:<span id="totalOfItems">0</span>frs</h4>
+                    </div>
+                    <button id="add" class="add_button" onclick="addButton()">
                         +
                     </button>
                 </div>
+                <div class="Alert"><h5 id="alertMessage"></h5></div>
         
             </div>
-            <div class="list-gen"><button id="generate" class="generate_but">Generate List</button></div>
+            <div class="list-gen"><button id="generate" class="generate_but" onclick="calculate()">Generate List</button></div>
             
             
         </div>
    </div>
-   <script scr = "index.js"></script>
+   <script scr ="index.js">
+       
+        
+        const item_number = document.getElementById("item_number");
+        const add = document.getElementById("add");
+        const generate = document.getElementById("generate");
+        const container = document.getElementById("PTI");
+        
+        let total=0;
+        const alert = document.getElementById("alertMessage");
+
+        function calculate(){
+
+            total = 0;
+            
+            
+            const budget = +document.getElementById("budget_value").value;
+            const totalOfItems = document.getElementById("totalOfItems");
+            const count =  document.querySelectorAll("#item_number").length;
+            for(let i = 1;i<=count;i++){
+                total+= +document.getElementById(`price_${i}`).value;                
+                totalOfItems.innerHTML = total;           
+            }  
+            const remain = budget-total;
+            if (remain<0){ 
+                alert.innerHTML = `Budget Small. You need ${-1*remain}frs`;
+            }
+            else{
+                alert.innerHTML = "" ;
+            }
+            return remain
+
+            
+        }
+        function addButton(){
+            const budget = document.getElementById("budget_value").value;
+            a = calculate();
+            
+            if (budget == ""){
+                alert.innerHTML = "Please insert a Budget";
+            }else if(a<0){
+                alert.innerHTML = `Budget Small. You need ${-1*a}frs`;
+            }
+            else{
+                
+                const count = document.querySelectorAll("#item_number").length;
+                const priceValue = document.getElementById(`price_${count}`).value;
+                const item = document.getElementById("item").value;
+                if(priceValue == "" || item == ""){
+                    alert.innerHTML = "Item or Price missing"
+                }else{
+                    calculate();
+                    const count = document.querySelectorAll("#item_number").length+1;
+                    const htmlstring = `               
+                            <div class="price-text-in" id="textPrice_${count}"  >
+                                <span class="item-num" id="item_number">${count}</span>
+                                <input type="text" id="item" class="item_class"/>
+                                <input type="number" min="0" id="price_${count}" class="price_class" oninput="calculate()"/>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend',htmlstring); 
+                }
+
+ 
+            }           
+        
+        }
+        function delButton(){
+           const LastPTI = document.getElementById("PTI").lastChild;
+           LastPTI.remove(); 
+           calculate()            
+
+        }
+
+   </script>
 
 </body>
 </html>
