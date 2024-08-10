@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Make Shopping List</title>
     <link rel="stylesheet" href="styles.css">    
 </head>
 <body>
     <div class="parent_body">
-        <div class="main_body">
+        <div class="main_body" >
                 <div class="Create_Shoping_list">
                     <legend class="CSL">Create Shopping List</legend>
                 </div>
@@ -27,7 +27,7 @@
                 <div id="PTI">
                     <div class="price-text-in" id="textPrice_1" >
                         <span class="item-num" id="item_number">1</span>
-                        <input type="text" id="item" class="item_class"/>
+                        <input type="text" id="item_1" class="item_class"/>
                         <input type="number" min="0" id="price_1" class="price_class" oninput="calculate()"/>
                    </div>
                 </div>
@@ -46,13 +46,12 @@
                 <div class="Alert"><h5 id="alertMessage"></h5></div>
         
             </div>
-            <div class="list-gen"><button id="generate" class="generate_but" onclick="calculate()">Generate List</button></div>
+            <div class="list-gen" id="genBut"><button id="generate" class="generate_but" onclick="generating()">Generate List</button></div>
             
             
         </div>
    </div>
-   <script scr ="index.js">
-       
+   <script scr ="index.js"> 
         
         const item_number = document.getElementById("item_number");
         const add = document.getElementById("add");
@@ -63,13 +62,11 @@
         const alert = document.getElementById("alertMessage");
 
         function calculate(){
-
-            total = 0;
-            
-            
+            total = 0;            
             const budget = +document.getElementById("budget_value").value;
             const totalOfItems = document.getElementById("totalOfItems");
             const count =  document.querySelectorAll("#item_number").length;
+
             for(let i = 1;i<=count;i++){
                 total+= +document.getElementById(`price_${i}`).value;                
                 totalOfItems.innerHTML = total;           
@@ -81,10 +78,9 @@
             else{
                 alert.innerHTML = "" ;
             }
-            return remain
-
-            
+            return remain            
         }
+
         function addButton(){
             const budget = document.getElementById("budget_value").value;
             a = calculate();
@@ -97,33 +93,102 @@
             else{
                 
                 const count = document.querySelectorAll("#item_number").length;
-                const priceValue = document.getElementById(`price_${count}`).value;
-                const item = document.getElementById("item").value;
-                if(priceValue == "" || item == ""){
-                    alert.innerHTML = "Item or Price missing"
-                }else{
-                    calculate();
-                    const count = document.querySelectorAll("#item_number").length+1;
+                
+                
+                let empty = document.querySelectorAll("#item_number").length;
+                if(empty==0){
+                    const count = document.querySelectorAll("#item_number").length+1; 
                     const htmlstring = `               
                             <div class="price-text-in" id="textPrice_${count}"  >
                                 <span class="item-num" id="item_number">${count}</span>
-                                <input type="text" id="item" class="item_class"/>
+                                <input type="text" id="item_${count}" class="item_class"/>
                                 <input type="number" min="0" id="price_${count}" class="price_class" oninput="calculate()"/>
                         </div>
                     `;
                     container.insertAdjacentHTML('beforeend',htmlstring); 
+
+                }else{
+                    const priceValue = document.getElementById(`price_${count}`).value;
+                    const item = document.getElementById(`item_${count}`).value;
+                    if(priceValue == ""  || item == ""){
+                        alert.innerHTML = "Item or Price missing"
+                    }else{
+                        calculate();
+                        const count = document.querySelectorAll("#item_number").length+1;
+                        const htmlstring = `               
+                                <div class="price-text-in" id="textPrice_${count}"  >
+                                    <span class="item-num" id="item_number">${count}</span>
+                                    <input type="text" id="item_${count}" class="item_class"/>
+                                    <input type="number" min="0" id="price_${count}" class="price_class" oninput="calculate()"/>
+                            </div>
+                        `;
+                        container.insertAdjacentHTML('beforeend',htmlstring); 
+                }  
                 }
+
 
  
             }           
         
         }
+
         function delButton(){
            const LastPTI = document.getElementById("PTI").lastChild;
            LastPTI.remove(); 
-           calculate()            
+           calculate()   //remove delete button when there is nothing on the screen         
 
         }
+
+        function generating(){
+
+
+            
+            const count =  document.querySelectorAll("#item_number").length;
+            let table = document.getElementById("list_container");
+            let tags = `<table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Prices</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        `
+
+               
+
+            for (let i=1;i<=count;i++){
+                const itemNo = document.getElementById(`item_${i}`).value;
+                const priceNo = document.getElementById(`price_${i}`).value;
+                tags+=`<tr>
+                            <td>${itemNo}</td>
+                            <td>${priceNo}</td>
+                       </tr>`       
+            }
+            tags+=`    </tbody>
+                   </table>`
+            table.innerHTML = tags;
+           
+            const shoppingList = document.querySelector(".CSL");
+            shoppingList.innerText = "Shopping List"
+            const budgetContainer = document.querySelector(".budget");
+            budgetContainer.remove();
+            const nameList = document.querySelector(".list"); 
+            nameList.remove();
+            const newBut = document.getElementById("genBut");
+            newBut.innerHTML = `<button class="save">Save</button>
+                                <button class="return">Return</button>`     
+            
+        
+ 
+
+        }
+        
+        //fix generate to generate when all input have been filled.
+        //code the return and save button.
+        //fix the add button to add only when everything is filled.
+        //click particular item and price to delete item.
+    
 
    </script>
 
